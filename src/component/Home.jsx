@@ -1,9 +1,6 @@
 import React from "react";
 import logo from "../asset/LOGO.png";
 import Image1 from "../asset/b.jpg";
-import Image2 from "../asset/avatar.png";
-import Image3 from "../asset/fastx.png";
-import Image4 from "../asset/Batman.jpg";
 import {
   BrowserRouter as Router,
   Route,
@@ -11,6 +8,8 @@ import {
   Switch,
   Routes,
 } from "react-router-dom";
+import { useState, useEffect } from "react";
+import UserService from "../service/user-service";
 
 const highlight = [
   {
@@ -19,26 +18,15 @@ const highlight = [
   },
 ];
 
-const moviedetails = [
-  {
-    movImage: Image2,
-    name: "Avatar",
-  },
-  {
-    movImage: Image3,
-    name: "Fast X",
-  },
-  {
-    movImage: Image2,
-    name: "Avatar",
-  },
-  {
-    movImage: Image3,
-    name: "Fast X",
-  },
-];
-
 const HomePage = () => {
+  const userService = new UserService();
+  const [moviedetails, setMovieDetails] = useState([]);
+  useEffect(() => {
+    userService.getAllMovies().then((data) => {
+      setMovieDetails(data);
+    });
+  }, []);
+
   return (
     <div>
 
@@ -120,11 +108,11 @@ const HomePage = () => {
         ))}
       </div>
 
-      <div style={{ display: "flex", flexWrap: "wrap", marginLeft: "48px" ,position:'relative',bottom:'280px'}}>
+      <div style={{ display: "flex", flexWrap: "wrap", marginLeft: "48px" }}>
         {moviedetails.map((moviedetail, index) => (
           <Link
             key={index}
-            to={`/movie-details/${index}`} // Update the to prop with a unique identifier
+            to={`/movie-details/${moviedetail.id}`} // Update the to prop with a unique identifier
             style={{ textDecoration: "none" }}
           >
             <div
@@ -136,7 +124,7 @@ const HomePage = () => {
             >
               <img
                 className="bg"
-                src={moviedetail.movImage}
+                src={moviedetail.imageUrl}
                 alt="Sorry"
                 style={{
                   height: "400px",
