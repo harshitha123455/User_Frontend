@@ -1,4 +1,5 @@
 import React from "react";
+import logo from "../asset/LOGO.png";
 import { Link } from "react-router-dom";
 
 const screens = [
@@ -37,13 +38,42 @@ const screens = [
 
 const ScreenSelect = () => {
   return (
-    <div>
+    <div >
+
+<div> {/* Navbar */}
+      <ul className="navbar-items">
+        <img
+          src={logo}
+          alt="No Logo"
+          style={{position: "relative", left: "80px" ,bottom:'220px', width:'150px',zIndex:1 }}
+        />
+        <li>
+          <a href="/" style={{ position: "relative", left: "1040px",bottom:'170px' ,zIndex:1}}>
+            Home
+          </a>
+        </li>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <li>
+          <a href="/movies" style={{ position: "relative", left: "1040px",bottom:'170px' ,zIndex:1}}>
+            Movies
+          </a>
+        </li>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <li>
+          <a href="/contact" style={{ position: "relative", left: "1040px",bottom:'170px' ,zIndex:1}}>
+            Contact
+          </a>
+        </li>
+      </ul></div>
+
+
       <u>
-        <h1 style={{ position: "relative", left: "650px" }}>
-          Screen Select
+        <h1 style={{ position: "relative", left: "650px", bottom: "260px", color:'white' }}>
+          Select Screen
         </h1>
       </u>
 
+      <div style={{ position: "relative", bottom: "280px" }}>
       <div style={{ display: "flex",flexWrap:"wrap" ,marginLeft:"40px" }}>
       {screens.map((screen, index) => (
         <Link
@@ -72,6 +102,7 @@ const ScreenSelect = () => {
         </div>
         </Link>
       ))}
+      </div>
       </div>
     </div>
   );

@@ -6,6 +6,7 @@ import {
   Switch,
   Routes,
 } from "react-router-dom";
+import logo from "../asset/LOGO.png";
 import Button from "@mui/joy/Button";
 import Modal from "@mui/joy/Modal";
 import ModalClose from "@mui/joy/ModalClose";
@@ -13,19 +14,42 @@ import Typography from "@mui/joy/Typography";
 import Sheet from "@mui/joy/Sheet";
 import "../App.css";
 
-const screens = [
-  {
-    id: 1,
-    available_seats: 100,
-    time: "7:00 AM",
-  },
-];
 
 const MovieDetails = () => {
   const [open, setOpen] = React.useState(false);
 
   return (
-    <div style={{position: "relative", bottom: "30px"}}>
+    <div>
+
+
+      <div> {/* Navbar */}
+      <ul className="navbar-items">
+        <img
+          src={logo}
+          alt="No Logo"
+          style={{position: "relative", left: "80px" ,bottom:'220px', width:'150px',zIndex:1 }}
+        />
+        <li>
+          <a href="/" style={{ position: "relative", left: "1040px",bottom:'170px' ,zIndex:1}}>
+            Home
+          </a>
+        </li>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <li>
+          <a href="/movies" style={{ position: "relative", left: "1040px",bottom:'170px' ,zIndex:1}}>
+            Movies
+          </a>
+        </li>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <li>
+          <a href="/contact" style={{ position: "relative", left: "1040px",bottom:'170px' ,zIndex:1}}>
+            Contact
+          </a>
+        </li>
+      </ul></div>
+
+
+    <div style={{position: "relative", bottom: "350px"}}>
       <u>
         <h1 style={{ position: "relative",top:'25px' ,left: "650px", color: "" }}>
           Movie Details
@@ -182,16 +206,14 @@ const MovieDetails = () => {
                         Select Screens
                       </button>
                     </Link>
-                    {/* <button type="submit" style={{position: 'relative' , top: '10px' , left: '60px'}}>Select Seats</button> */}
                   </form>
-                  {/* Make sure to use <code>aria-labelledby</code> on the modal dialog with an
-                optional <code>aria-describedby</code> attribute. */}
                 </Typography>
               </Sheet>
             </Modal>
           </React.Fragment>
         </div>
       </div>
+    </div>
     </div>
   );
 };

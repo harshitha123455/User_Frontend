@@ -1,7 +1,9 @@
 import React from "react";
+import logo from "../asset/LOGO.png";
 import Image1 from "../asset/b.jpg";
 import Image2 from "../asset/avatar.png";
 import Image3 from "../asset/fastx.png";
+import Image4 from "../asset/Batman.jpg";
 import {
   BrowserRouter as Router,
   Route,
@@ -9,6 +11,13 @@ import {
   Switch,
   Routes,
 } from "react-router-dom";
+
+const highlight = [
+  {
+    mainMovImage: Image1,
+    mainName: "No Way Home",
+  },
+];
 
 const moviedetails = [
   {
@@ -32,33 +41,86 @@ const moviedetails = [
 const HomePage = () => {
   return (
     <div>
-      <div>
+
+      {/* Navbar */}
+      <ul className="navbar-items">
         <img
-          class="bg"
-          src={Image1}
-          alt="Sorry"
-          style={{ width: "1519px", height: "900px", objectFit: "cover" }}
+          src={logo}
+          alt="No Logo"
+          style={{position: "relative", left: "80px" ,bottom:'220px', width:'150px',zIndex:1 }}
         />
-        <h1
-          style={{
-            color: "white",
-            position: "relative",
-            bottom: "590px",
-            left: "670px",
-            width: "500px",
-          }}
-        >
-          No Way Home
-        </h1>
-        <Link to="/movie-details">
-          <button
-            style={{ position: "relative", bottom: "550px", left: "730px" }}
-          >
-            Book Tickets
-          </button>
-        </Link>
+        <li>
+          <a href="/" style={{ position: "relative", left: "1040px",bottom:'170px' ,zIndex:1}}>
+            Home
+          </a>
+        </li>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <li>
+          <a href="/movies" style={{ position: "relative", left: "1040px",bottom:'170px' ,zIndex:1}}>
+            Movies
+          </a>
+        </li>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <li>
+          <a href="/contact" style={{ position: "relative", left: "1040px",bottom:'170px' ,zIndex:1}}>
+            Contact
+          </a>
+        </li>
+      </ul>
+
+
+      <div style={{ display: "flex", flexWrap: "wrap" }}>
+        {highlight.map((highlight, index1) => (
+          <div>
+            <Link
+              // key={index1}
+              // to={`/movie-details/${index1}`}    // Update the to prop with a unique identifier
+
+              to={`/movie-details`}
+              style={{ textDecoration: "none" }}
+            >
+              <button
+                style={{
+                  position: "relative",
+                  top: "45px",
+                  left: "720px",
+                  zIndex: 1,
+                }}
+              >
+                Book Tickets
+              </button>
+            </Link>
+
+            <div>
+              <img
+                className="bg"
+                src={highlight.mainMovImage}
+                alt="Sorry"
+                style={{
+                  width: "1519px",
+                  height: "900px",
+                  position: "relative",
+                  bottom: "376px",
+                  objectFit: "cover",
+                }}
+              />
+              <h1
+                style={{
+                  color: "white",
+                  position: "relative",
+                  bottom: "980px",
+                  left: "670px",
+                  width: "500px",
+                }}
+              >
+                {highlight.mainName}
+              </h1>
+            </div>
+          </div>
+        ))}
       </div>
-      <div style={{ display: "flex", flexWrap: "wrap", marginLeft: "48px" }}>
+
+      <div style={{ display: "flex", flexWrap: "wrap", marginLeft: "48px" ,position:'relative',bottom:'280px'}}>
         {moviedetails.map((moviedetail, index) => (
           <Link
             key={index}

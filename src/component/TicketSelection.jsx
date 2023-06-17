@@ -1,6 +1,18 @@
 import React, { useState } from "react";
 import "../TicketSelect.css";
-let a=5;
+import {
+  BrowserRouter as Router,
+  Route,
+  Link,
+  Switch,
+  Routes,
+} from "react-router-dom";
+import logo from "../asset/LOGO.png";
+import { useNavigate } from "react-router-dom";
+
+
+let a = 3;
+
 const Seat = ({ number, selected, onClick }) => {
   return (
     <div className={`seat ${selected ? "selected" : ""}`} onClick={onClick}>
@@ -10,6 +22,9 @@ const Seat = ({ number, selected, onClick }) => {
 };
 
 const TicketSelect = () => {
+  const navigate = useNavigate();
+  const [showPopup, setShowPopup] = useState(false);
+
   const [selectedSeats, setSelectedSeats] = useState([]);
 
   const handleSeatClick = (seatNumber) => {
@@ -61,7 +76,6 @@ const TicketSelect = () => {
             disabled={selectedSeats.length >= a && !isSelected}
           />
         );
-        
       }
 
       seats.push(
@@ -88,32 +102,120 @@ const TicketSelect = () => {
     // Here you can make an API call to send the numeric seat numbers to the backend
     // For demonstration purposes, we'll just log the seat numbers to the console
     console.log(numericSeatNumbers);
+
+    if (selectedSeats.length < a) {
+      setShowPopup(true);
+      // Set showPopup to true if selected seats are less than a
+    } else {
+        navigate('/payment')
+    }
   };
 
   return (
     <div>
+      {/* Navbar */}
+      <ul className="navbar-items">
+        <img
+          src={logo}
+          alt="No Logo"
+          style={{
+            position: "relative",
+            left: "80px",
+            bottom: "220px",
+            width: "150px",
+            zIndex: 1,
+          }}
+        />
+        <li>
+          <a
+            href="/"
+            style={{
+              position: "relative",
+              left: "1040px",
+              bottom: "170px",
+              zIndex: 1,
+            }}
+          >
+            Home
+          </a>
+        </li>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <li>
+          <a
+            href="/movies"
+            style={{
+              position: "relative",
+              left: "1040px",
+              bottom: "170px",
+              zIndex: 1,
+            }}
+          >
+            Movies
+          </a>
+        </li>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <li>
+          <a
+            href="/contact"
+            style={{
+              position: "relative",
+              left: "1040px",
+              bottom: "170px",
+              zIndex: 1,
+            }}
+          >
+            Contact
+          </a>
+        </li>
+      </ul>
+
       <div
         style={{
-          margin:'130px',
+          margin: "130px",
           padding: "40px",
-          backgroundColor: 'white',
+          backgroundColor: "white",
           borderRadius: "30px",
           position: "relative",
-          bottom: "105px",
+          bottom: "360px",
         }}
       >
-        <div style={{position: "relative", left: "50px" }}>
+        <div style={{ position: "relative", left: "50px" }}>
           <h1>Select Your Seats</h1>
           <div>
-            <h2 style={{ position: "relative", left: "370px",}}>-------------------Screen-------------------</h2>
+            <h2 style={{ position: "relative", left: "370px" }}>
+              -------------------Screen-------------------
+            </h2>
             <div className="seat-container">{renderSeats()}</div>
-            <div className="selected-seats" style={{backgroundColor:'white',padding:'40px',marginRight:'90px',paddingBottom:'40px',}}>
-              <u><h3>Selected Seats:</h3></u>
+            <div
+              className="selected-seats"
+              style={{
+                backgroundColor: "white",
+                padding: "40px",
+                marginRight: "90px",
+                paddingBottom: "40px",
+              }}
+            >
+              <u>
+                <h3>Selected Seats:</h3>
+              </u>
               <p>{selectedSeats.join(", ")}</p>
-              <u><h3>Total Amount:</h3></u>
+              <u>
+                <h3>Total Amount:</h3>
+              </u>
               <p>{`₹ ${totalAmount}`}</p>
 
-              <div style={{ position: "relative",  left: "820px", bottom: "100px"}}><button onClick={sendDataToBackend}>Confirm Booking</button></div>
+              <div
+                style={{ position: "relative", left: "820px", bottom: "60px" }}
+              >
+                <button onClick={sendDataToBackend}>Confirm Booking</button>
+                {showPopup && (
+                  <div className="popup">
+                    <p>Please select at least {a} seats.</p>
+                  </div>
+                )}
+
+               
+              </div>
             </div>
           </div>
         </div>

@@ -105,7 +105,7 @@
 
 
 import React, { useState } from "react";
-import Logo from '../asset/logo.jpg'
+import Logo from '../asset/LOGO.png'
 import {
   BrowserRouter as Router,
   Route,
@@ -130,9 +130,9 @@ const Navbar = () => {
         <span></span>
       </div>
       <ul
-        className="navbar-items" 
+        className="navbar-items" style={{zIndex:1}}
       >
-        <img src={Logo} alt="No Logo" style={{ position: "relative", left: "60px" , width:'60px'}} />
+        <img src={Logo} alt="No Logo" style={{ position: "relative", left: "60px" ,bottom:'50px', width:'150px'}} />
         <li>
           <a href="/" style={{position: "relative",left:'1020px'}}>Home</a>
         </li>

@@ -9,6 +9,7 @@ import { BrowserRouter as Router,Route,Link,Switch, Routes} from 'react-router-d
 import MovieDetails from "./component/MovieDetails";
 import TicketSelection from "./component/TicketSelection";
 import ScreenSelect from "./component/ScreenSelect";
+import Payment from "./component/Payment";
 import { useState } from "react";
 
 
@@ -28,8 +29,10 @@ const App = () => {
         <Route path="/movie-details" element={<MovieDetails />} />
         <Route path="/ticket-selection" element={<TicketSelection />} />
         <Route path="/screen-select" element={<ScreenSelect />} />
+        <Route path="/payment" element={<Payment />} />
       </Routes>
     </Router>
+    {/* <Footer/> */}
   
     </div>
    );
