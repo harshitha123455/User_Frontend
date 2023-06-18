@@ -32,12 +32,8 @@ const HomePage = () => {
         {
           mainMovImage: "http://localhost:8880/highlight/highlight.jpg",
           mainName: data.name,
-<<<<<<< HEAD
           id: data.id,
         }
-=======
-        },
->>>>>>> 3975b3d9aac78d7df806c6dcead74dac42678fc9
       ]);
     });
   }, []);
