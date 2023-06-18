@@ -27,15 +27,15 @@ const TicketSelect = () => {
   const [formData, setFormData] = useState(location.state?.formData || {});
   const [showPopup, setShowPopup] = useState(false);
   const [selectedSeats, setSelectedSeats] = useState([]);
-  const [a, setA] = useState(0);
+  const [limit, setLimit] = useState(0);
 
   useEffect(() => {
-    setA(parseInt(formData.tickets));
-    console.log(a);
+    setLimit(parseInt(formData.tickets));
+    console.log(limit);
   }, []);
 
   const handleSeatClick = (seatNumber) => {
-    if (selectedSeats.length < a) {
+    if (selectedSeats.length < limit) {
       if (selectedSeats.includes(seatNumber)) {
         setSelectedSeats(selectedSeats.filter((seat) => seat !== seatNumber));
       } else {
@@ -80,7 +80,7 @@ const TicketSelect = () => {
             number={seatId}
             selected={isSelected}
             onClick={() => handleSeatClick(seatId)}
-            disabled={selectedSeats.length >= a && !isSelected}
+            disabled={selectedSeats.length >= limit && !isSelected}
           />
         );
       }
@@ -110,7 +110,7 @@ const TicketSelect = () => {
     // For demonstration purposes, we'll just log the seat numbers to the console
     console.log(numericSeatNumbers);
 
-    if (selectedSeats.length < a) {
+    if (selectedSeats.length < limit) {
       setShowPopup(true);
       // Set showPopup to true if selected seats are less than a
     } else {
@@ -217,7 +217,7 @@ const TicketSelect = () => {
                 <button onClick={sendDataToBackend}>Confirm Booking</button>
                 {showPopup && (
                   <div className="popup">
-                    <p>Please select at least {a} seats.</p>
+                    <p>Please select at least {limit} seats.</p>
                   </div>
                 )}
 
