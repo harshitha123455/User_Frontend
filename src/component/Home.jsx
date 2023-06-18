@@ -31,6 +31,7 @@ const HomePage = () => {
         {
           mainMovImage: "http://localhost:8880/highlight/highlight.jpg",
           mainName: data.name,
+          id: data.id,
         }
       ]);
     });
@@ -73,7 +74,7 @@ const HomePage = () => {
               // key={index1}
               // to={`/movie-details/${index1}`}    // Update the to prop with a unique identifier
 
-              to={`/movie-details`}
+              to={`/movie-details/${highlight.id}`}
               style={{ textDecoration: "none" }}
             >
               <button
