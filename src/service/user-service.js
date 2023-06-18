@@ -51,5 +51,22 @@ export default class UserService {
     } catch (error) {
       console.log(error);
     }
+  };
+
+  getTimeTableByShowId = async (id) => {
+    try {
+      const response = await fetch(this.BASE_URL + "/timeTable/search/show/id/" + id, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      if (response.ok) {
+        const responseBody = await response.json();
+        return responseBody;
+      }
+    } catch (error) {
+      console.log(error);
+    }
   }
 }

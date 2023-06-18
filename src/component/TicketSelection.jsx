@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../TicketSelect.css";
 import {
   BrowserRouter as Router,
@@ -6,14 +6,13 @@ import {
   Link,
   Switch,
   Routes,
+  useLocation
 } from "react-router-dom";
 import logo from "../asset/LOGO.png";
 import { useNavigate } from "react-router-dom";
 
-
-let a = 3;
-
 const Seat = ({ number, selected, onClick }) => {
+
   return (
     <div className={`seat ${selected ? "selected" : ""}`} onClick={onClick}>
       {number}
@@ -23,9 +22,17 @@ const Seat = ({ number, selected, onClick }) => {
 
 const TicketSelect = () => {
   const navigate = useNavigate();
-  const [showPopup, setShowPopup] = useState(false);
+  const location = useLocation();
 
+  const [formData, setFormData] = useState(location.state?.formData || {});
+  const [showPopup, setShowPopup] = useState(false);
   const [selectedSeats, setSelectedSeats] = useState([]);
+  const [a, setA] = useState(0);
+
+  useEffect(() => {
+    setA(parseInt(formData.tickets));
+    console.log(a);
+  }, []);
 
   const handleSeatClick = (seatNumber) => {
     if (selectedSeats.length < a) {

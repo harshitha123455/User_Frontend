@@ -1,23 +1,39 @@
 import React from "react";
 import logo from "../asset/LOGO.png";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import UserService from "../service/user-service";
 
 const ScreenSelect = () => {
   const userService = new UserService();
   const location = useLocation();
+  const navigate = useNavigate();
 
   const [shows, setShows] = useState([]);
   const [formData, setFormData] = useState(location.state?.formData || {});
 
   useEffect(() => {
-    console.log(formData);
-    userService.getAllShowsByMovieId(formData.mid).then((data) => {
-      setShows(data);
-      console.log(data);
+    userService.getAllShowsByMovieId(formData.mid).then(async (data) => {
+      const updatedShows = await Promise.all(
+        data.map(async (show) => {
+          const timeTable = await userService.getTimeTableByShowId(show.id);
+          return {
+            ...show,
+            screen: timeTable.screen,
+            date: timeTable.date,
+          };
+        })
+      );
+      setShows(updatedShows);
     });
   }, []);
+
+  const screenSelect = (show) => {
+    console.log(formData);
+    navigate("/ticket-selection", { state: { formData: { ...formData, show: show } } });
+  };
+  
+  
 
   return (
     <div>
@@ -96,30 +112,27 @@ const ScreenSelect = () => {
       <div style={{ position: "relative", bottom: "280px" }}>
         <div style={{ display: "flex", flexWrap: "wrap", marginLeft: "40px" }}>
           {shows.map((show, index) => (
-            <Link
-              key={index}
-              to={`/ticket-selection`}
-              style={{ textDecoration: "none" }}
-            >
-              <div
-                key={index}
-                style={{
-                  color: "black",
-                  backgroundColor: "white",
-                  borderRadius: "15px",
-                  margin: "50px",
-                  padding: "10px",
-                  paddingLeft: "30px",
-                  paddingRight: "30px",
-                }}
-              >
-                <h1 className="screen-number">Screen No - {show.id}</h1>
-                <p className="time-movie">Time - {show.time}</p>
-                <p className="available-seats">
-                  Available Seats - {show.available_seats}
-                </p>
-              </div>
-            </Link>
+            <button
+            key={index}
+            onClick={() => screenSelect(show)}
+            style={{
+              textDecoration: "none",
+              color: "black",
+              backgroundColor: "white",
+              borderRadius: "15px",
+              margin: "50px",
+              padding: "10px",
+              paddingLeft: "30px",
+              paddingRight: "30px",
+            }}
+          >
+            <h1 className="screen-number">{show.screen.name}</h1>
+            <p className="time-movie">Time - {show.time}</p>
+            <p className="available-seats">
+              Available Seats - {show.seatingArrangement.availableSeats}
+            </p>
+            <p className="date">Date - {show.date}</p>
+          </button>
           ))}
         </div>
       </div>

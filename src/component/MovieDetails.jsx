@@ -23,7 +23,6 @@ const MovieDetails = () => {
   const navigate = useNavigate();
   const { id } = useParams();
   const [open, setOpen] = React.useState(false);
-  const [shows, setShows] = useState([]);
   const [moviedetail, setMovieDetail] = useState(null);
 
   useEffect(() => {
