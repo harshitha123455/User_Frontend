@@ -28,10 +28,13 @@ const TicketSelect = () => {
   const [showPopup, setShowPopup] = useState(false);
   const [selectedSeats, setSelectedSeats] = useState([]);
   const [limit, setLimit] = useState(0);
+  const normalRate = formData.show.normalRate;
+  const premiumRate = formData.show.premiumRate;
+  const executiveRate = formData.show.executiveRate;
 
   useEffect(() => {
     setLimit(parseInt(formData.tickets));
-    console.log(limit);
+    console.log(formData);
   }, []);
 
   const handleSeatClick = (seatNumber) => {
@@ -51,9 +54,9 @@ const TicketSelect = () => {
 
     for (const seat of selectedSeats) {
       const row = seat.charAt(0);
-      let ratePerSeat = row === "I" || row === "J" ? 500 : 150;
+      let ratePerSeat = row === "I" || row === "J" ? premiumRate : normalRate;
       if (row == "G" || row == "H") {
-        ratePerSeat = 300;
+        ratePerSeat = executiveRate;
       }
       totalAmount += ratePerSeat;
     }
