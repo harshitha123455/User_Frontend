@@ -10,6 +10,7 @@ import MovieDetails from "./component/MovieDetails";
 import TicketSelection from "./component/TicketSelection";
 import ScreenSelect from "./component/ScreenSelect";
 import Payment from "./component/Payment";
+import Receipt from "./component/Receipt";
 import { useState } from "react";
 
 
@@ -31,6 +32,7 @@ const App = () => {
         <Route path="/ticket-selection" element={<TicketSelection />} />
         <Route path="/screen-select" element={<ScreenSelect />} />
         <Route path="/payment" element={<Payment />} />
+        <Route path="/receipt" element={<Receipt />} />
       </Routes>
     </Router>
     {/* <Footer/> */}
