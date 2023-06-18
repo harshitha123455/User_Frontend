@@ -69,4 +69,22 @@ export default class UserService {
       console.log(error);
     }
   }
+
+  getHighlight = async () => {
+    try {
+      const response = await fetch(this.BASE_URL + "/movie/highlight/get", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      console.log(response);
+      if (response.ok) {
+        const responseBody = await response.json();
+        return responseBody;
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
 }

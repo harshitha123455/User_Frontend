@@ -11,19 +11,28 @@ import {
 import { useState, useEffect } from "react";
 import UserService from "../service/user-service";
 
-const highlight = [
-  {
-    mainMovImage: Image1,
-    mainName: "No Way Home",
-  },
-];
+// const highlight = [
+//   {
+//     mainMovImage: Image1,
+//     mainName: "No Way Home",
+//   },
+// ];
 
 const HomePage = () => {
   const userService = new UserService();
   const [moviedetails, setMovieDetails] = useState([]);
+  const [highlight, setHighlight] = useState([]);
   useEffect(() => {
     userService.getAllMovies().then((data) => {
       setMovieDetails(data);
+    });
+    userService.getHighlight().then((data) => {
+      setHighlight([
+        {
+          mainMovImage: "http://localhost:8880/highlight/highlight.jpg",
+          mainName: data.name,
+        }
+      ]);
     });
   }, []);
 
