@@ -11,10 +11,11 @@ import {
 import logo from "../asset/LOGO.png";
 import { useNavigate } from "react-router-dom";
 
-const Seat = ({ number, selected, onClick }) => {
+const Seat = ({ number, selected, disabled, onClick }) => {
+  const seatClassName = `seat ${selected ? "selected" : ""} ${disabled ? "disabled" : ""}`;
 
   return (
-    <div className={`seat ${selected ? "selected" : ""}`} onClick={onClick}>
+    <div className={seatClassName} onClick={disabled ? null : onClick}>
       {number}
     </div>
   );
@@ -32,9 +33,16 @@ const TicketSelect = () => {
   const premiumRate = formData.show.premiumRate;
   const executiveRate = formData.show.executiveRate;
 
+  // Array of booked seats received from the backend
+  const bookedSeats = [
+    { seatNumber: "A1", disabled: true },
+    { seatNumber: "B3", disabled: true },
+    { seatNumber: "D5", disabled: true },
+    { seatNumber: "H5", disabled: true },
+  ];
+
   useEffect(() => {
     setLimit(parseInt(formData.tickets));
-    console.log(formData);
   }, []);
 
   const handleSeatClick = (seatNumber) => {
@@ -55,7 +63,7 @@ const TicketSelect = () => {
     for (const seat of selectedSeats) {
       const row = seat.charAt(0);
       let ratePerSeat = row === "I" || row === "J" ? premiumRate : normalRate;
-      if (row == "G" || row == "H") {
+      if (row === "G" || row === "H") {
         ratePerSeat = executiveRate;
       }
       totalAmount += ratePerSeat;
@@ -75,15 +83,17 @@ const TicketSelect = () => {
       for (let row of rows) {
         const seatId = `${row}${seatNumber}`;
         const isSelected = selectedSeats.includes(seatId);
-        let ratePerSeat = 150; // Default rate
+        const isDisabled = bookedSeats.some(
+          (bookedSeat) => bookedSeat.seatNumber === seatId && bookedSeat.disabled
+        );
 
         seatRow.push(
           <Seat
             key={seatId}
             number={seatId}
             selected={isSelected}
+            disabled={isDisabled}
             onClick={() => handleSeatClick(seatId)}
-            disabled={selectedSeats.length >= limit && !isSelected}
           />
         );
       }
@@ -109,15 +119,14 @@ const TicketSelect = () => {
 
   // Send numeric seat numbers to the backend
   const sendDataToBackend = () => {
-    // Here you can make an API call to send the numeric seat numbers to the backend
-    // For demonstration purposes, we'll just log the seat numbers to the console
+    // Make an API call to send the numeric seat numbers to the backend
+    // log the seat numbers to the console
     console.log(numericSeatNumbers);
 
     if (selectedSeats.length < limit) {
       setShowPopup(true);
-      // Set showPopup to true if selected seats are less than a
     } else {
-        navigate('/payment')
+      navigate('/payment');
     }
   };
 
@@ -220,11 +229,12 @@ const TicketSelect = () => {
                 <button onClick={sendDataToBackend}>Confirm Booking</button>
                 {showPopup && (
                   <div className="popup">
-                    <p>Please select at least {limit} seats.</p>
+                    <p>
+                      Please select {limit} seat{limit > 1 ? "s" : ""}!
+                    </p>
+                    <button onClick={() => setShowPopup(false)}>OK</button>
                   </div>
                 )}
-
-               
               </div>
             </div>
           </div>

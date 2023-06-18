@@ -49,7 +49,9 @@ const MovieDetails = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    navigate("/screen-select", { state: { formData } });
+
+      navigate("/screen-select", { state: { formData } });
+    
   };
   return (
     <div>
@@ -263,10 +265,12 @@ const MovieDetails = () => {
                           value={formData.phone}
                           onChange={handleChange}
                           required
+                          errormessage="Type a number with 10 numbers"
+                          pattern="[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]"
                         />
                       </div>
 
-                      <div>
+                      {/* <div>
                         <label htmlFor="date">Date:</label>
                         <input
                           type="date"
@@ -276,7 +280,7 @@ const MovieDetails = () => {
                           onChange={handleChange}
                           required
                         />
-                      </div>
+                      </div> */}
 
                       <div>
                         <label htmlFor="tickets">Number of Tickets:</label>
@@ -287,6 +291,7 @@ const MovieDetails = () => {
                           value={formData.tickets}
                           onChange={handleChange}
                           required
+                          pattern="^/[1-5]"
                         />
                       </div>
 

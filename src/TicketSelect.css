@@ -31,3 +31,7 @@
     font-weight: bold;
   }
   
+  .seat.disabled {
+    background-color: gray;
+    cursor: not-allowed;
+  }
