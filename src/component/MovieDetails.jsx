@@ -282,18 +282,26 @@ const MovieDetails = () => {
                         />
                       </div> */}
 
-                      <div>
-                        <label htmlFor="tickets">Number of Tickets:</label>
-                        <input
-                          type="number"
-                          id="tickets"
-                          name="tickets"
-                          value={formData.tickets}
-                          onChange={handleChange}
-                          required
-                          pattern="^/[1-5]"
-                        />
-                      </div>
+<div>
+  <label htmlFor="tickets">Number of Tickets:</label>
+  <input
+    type="number"
+    id="tickets"
+    name="tickets"
+    value={formData.tickets}
+    onChange={handleChange}
+    required
+    min="1"
+    max="8"
+    pattern="[1-8]"
+  />
+  {formData.tickets < 1 && (
+    <span style={{ color: 'red' }}>Please select at least 1 ticket.</span>
+  )}
+  {formData.tickets > 8 && (
+    <span style={{ color: 'red' }}>You can only book up to 8 tickets.</span>
+  )}
+</div>
 
                       <button
                         type="submit"
