@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "../TicketSelect.css";
+import curve from '../asset/curve.png'
 import {
   BrowserRouter as Router,
   Route,
@@ -49,21 +50,23 @@ const TicketSelect = () => {
 
   useEffect(() => {
     const fetchReservedSeats = async () => {
-      const reservedSeats = await userService.getReservedSeats(formData.show.id);
+      const reservedSeats = await userService.getReservedSeats(
+        formData.show.id
+      );
       const convertedSeats = convertToSeatNumbers(reservedSeats);
       setTempBookedSeats(convertedSeats);
       setLimit(parseInt(formData.tickets));
     };
-  
+
     fetchReservedSeats();
   }, []);
-  
+
   useEffect(() => {
     const updatedBookedSeats = tempBookedSeats.map((seatNumber) => ({
       seatNumber,
-      disabled: true
+      disabled: true,
     }));
-  
+
     setBookedSeats(updatedBookedSeats);
   }, [tempBookedSeats]);
 
@@ -229,7 +232,7 @@ const TicketSelect = () => {
           </a>
         </li>
       </ul>
-
+        
       <div
         style={{
           margin: "130px",
@@ -237,48 +240,63 @@ const TicketSelect = () => {
           backgroundColor: "white",
           borderRadius: "30px",
           position: "relative",
-          bottom: "360px",
+          bottom: "390px",
+          height:"100vh"
         }}
       >
         <div style={{ position: "relative", left: "50px" }}>
-          <h1>Select Your Seats</h1>
+          <h1 style={{ position: "relative", left: "30px" }}>Select Your Seats</h1>
           <div>
-            <h2 style={{ position: "relative", left: "370px" }}>
-              -------------------Screen-------------------
+            <h3 style={{ position: "relative", left: "560px",top:'10px' }}>Screen</h3>
+            <h2 style={{ position: "relative", left: "320px",bottom:'10px' }}>
+              .....................................................................................
             </h2>
-            <div className="seat-container">{renderSeats()}</div>
-            <div
-              className="selected-seats"
-              style={{
-                backgroundColor: "white",
-                padding: "40px",
-                marginRight: "90px",
-                paddingBottom: "40px",
-              }}
-            >
-              <u>
-                <h3>Selected Seats:</h3>
-              </u>
-              <p>{selectedSeats.join(", ")}</p>
-              <u>
-                <h3>Total Amount:</h3>
-              </u>
-              <p>{`₹ ${totalAmount}`}</p>
-
+            <div style={{ position: "relative", left: "60px",top:'85px' }}>
+            <h4 >Classic - [A-F] - </h4> <p style={{position:'relative',left:'120px',bottom:'41px'}}>₹ 100</p>
+            <h4 >Executive - [G-H] - </h4> <p style={{position:'relative',left:'145px',bottom:'40px'}}>₹ 200</p>
+            <h4 >Premium - [I-J] - </h4> <p style={{position:'relative',left:'130px',bottom:'40px'}}>₹ 300</p>
+            </div>
+            <div style={{ position: "relative", bottom: "273px" }} className="seat-container">{renderSeats()}</div>
+              <div style={{position:'relative',bottom:'245px',left:'58px',backgroundColor:'',width:'700px'}}>
+                <p>
+                  <h4 style={{fontSize:'16.38px'}}>Selected Seats : {selectedSeats.join(", ")}</h4>
+                </p>
+                <p>
+                  <h4>Total Amount : {`₹ ${totalAmount}`}</h4>
+                </p>
+              </div>
+              
               <div
-                style={{ position: "relative", left: "820px", bottom: "60px" }}
+                style={{
+                  position: "relative",
+                  left: "920px",
+                  bottom: "628px",
+                  backgroundColor: "white",
+                  height: "130px",
+                  width: "200px",
+                }}
               >
-                <button onClick={sendDataToBackend}>Confirm Booking</button>
+                <button
+                  style={{ position: "relative", left: "7px" }}
+                  onClick={sendDataToBackend}
+                >
+                  Confirm Booking
+                </button>
                 {showPopup && (
                   <div className="popup">
                     <p>
                       Please select {limit} seat{limit > 1 ? "s" : ""}!
                     </p>
-                    <button onClick={() => setShowPopup(false)}>OK</button>
+                    <button
+                      style={{ position: "relative", left: "45px" }}
+                      onClick={() => setShowPopup(false)}
+                    >
+                      OK
+                    </button>
                   </div>
                 )}
               </div>
-            </div>
+            
           </div>
         </div>
       </div>
