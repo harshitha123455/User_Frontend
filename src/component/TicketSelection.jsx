@@ -6,13 +6,16 @@ import {
   Link,
   Switch,
   Routes,
-  useLocation
+  useLocation,
 } from "react-router-dom";
 import logo from "../asset/LOGO.png";
 import { useNavigate } from "react-router-dom";
+import UserService from "../service/user-service";
 
 const Seat = ({ number, selected, disabled, onClick }) => {
-  const seatClassName = `seat ${selected ? "selected" : ""} ${disabled ? "disabled" : ""}`;
+  const seatClassName = `seat ${selected ? "selected" : ""} ${
+    disabled ? "disabled" : ""
+  }`;
 
   return (
     <div className={seatClassName} onClick={disabled ? null : onClick}>
@@ -24,26 +27,45 @@ const Seat = ({ number, selected, disabled, onClick }) => {
 const TicketSelect = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const userService = new UserService();
 
   const [formData, setFormData] = useState(location.state?.formData || {});
   const [showPopup, setShowPopup] = useState(false);
   const [selectedSeats, setSelectedSeats] = useState([]);
   const [limit, setLimit] = useState(0);
+  const [tempBookedSeats, setTempBookedSeats] = useState([]);
+  const [bookedSeats, setBookedSeats] = useState([]);
   const normalRate = formData.show.normalRate;
   const premiumRate = formData.show.premiumRate;
   const executiveRate = formData.show.executiveRate;
 
   // Array of booked seats received from the backend
-  const bookedSeats = [
-    { seatNumber: "A1", disabled: true },
-    { seatNumber: "B3", disabled: true },
-    { seatNumber: "D5", disabled: true },
-    { seatNumber: "H5", disabled: true },
-  ];
+  // const bookedSeats = [
+  //   { seatNumber: "A1", disabled: true },
+  //   { seatNumber: "B3", disabled: true },
+  //   { seatNumber: "D5", disabled: true },
+  //   { seatNumber: "H5", disabled: true },
+  // ];
 
   useEffect(() => {
-    setLimit(parseInt(formData.tickets));
+    const fetchReservedSeats = async () => {
+      const reservedSeats = await userService.getReservedSeats(formData.show.id);
+      const convertedSeats = convertToSeatNumbers(reservedSeats);
+      setTempBookedSeats(convertedSeats);
+      setLimit(parseInt(formData.tickets));
+    };
+  
+    fetchReservedSeats();
   }, []);
+  
+  useEffect(() => {
+    const updatedBookedSeats = tempBookedSeats.map((seatNumber) => ({
+      seatNumber,
+      disabled: true
+    }));
+  
+    setBookedSeats(updatedBookedSeats);
+  }, [tempBookedSeats]);
 
   const handleSeatClick = (seatNumber) => {
     if (selectedSeats.length < limit) {
@@ -84,7 +106,8 @@ const TicketSelect = () => {
         const seatId = `${row}${seatNumber}`;
         const isSelected = selectedSeats.includes(seatId);
         const isDisabled = bookedSeats.some(
-          (bookedSeat) => bookedSeat.seatNumber === seatId && bookedSeat.disabled
+          (bookedSeat) =>
+            bookedSeat.seatNumber === seatId && bookedSeat.disabled
         );
 
         seatRow.push(
@@ -117,6 +140,17 @@ const TicketSelect = () => {
     return (row - 1) * 10 + seat;
   });
 
+  // Convert numeric seat numbers to seat numbers
+  const convertToSeatNumbers = (numericSeats) => {
+    var seats = [];
+    numericSeats.map((numericSeat) => {
+      const row = String.fromCharCode(Math.floor((numericSeat - 1) / 10) + 65);
+      const seat = ((numericSeat - 1) % 10) + 1;
+      seats.push(row + seat);
+    });
+    return seats;
+  };
+
   // Send numeric seat numbers to the backend
   const sendDataToBackend = () => {
     // Make an API call to send the numeric seat numbers to the backend
@@ -126,7 +160,15 @@ const TicketSelect = () => {
     if (selectedSeats.length < limit) {
       setShowPopup(true);
     } else {
-      navigate('/payment', { state: {formData: {...formData, selectedSeats: numericSeatNumbers, totalAmount: totalAmount}} });
+      navigate("/payment", {
+        state: {
+          formData: {
+            ...formData,
+            selectedSeats: numericSeatNumbers,
+            totalAmount: totalAmount,
+          },
+        },
+      });
     }
   };
 

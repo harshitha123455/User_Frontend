@@ -109,7 +109,7 @@ export default class UserService {
           user: {
             name: formData.name,
             email: formData.email,
-            phone: formData.phone,
+            contactNumber: formData.phone,
           },
         }),
       });
@@ -125,4 +125,28 @@ export default class UserService {
       return [false, error];
     }
   };
+
+   getReservedSeats = async (showId) => {
+    try {
+      const response = await fetch(
+        `http://localhost:8880/show/reserved/id/${showId}`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      if (response.ok) {
+        const responseBody = await response.json();
+        const pos = responseBody.pos; // Extracting pos from the response
+        return pos;
+      } else {
+        console.log("Error in getting reserved seats");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  
 }
