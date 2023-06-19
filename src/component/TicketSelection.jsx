@@ -126,7 +126,7 @@ const TicketSelect = () => {
     if (selectedSeats.length < limit) {
       setShowPopup(true);
     } else {
-      navigate('/payment');
+      navigate('/payment', { state: {formData: {...formData, selectedSeats: numericSeatNumbers, totalAmount: totalAmount}} });
     }
   };
 

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import tick from '../asset/tick.png'
@@ -10,17 +10,25 @@ import {
     Switch,
     Routes,
     useParams,
+    useNavigate,
+    useLocation,
   } from "react-router-dom";
 
 const NotificationComponent = () => {
+
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const [formData, setFormData] = useState(location.state?.formData || {});
+
    
   const handleButtonClick = () => {
     toast.info(
         <div >
           <p style={{textAlign:'center'}}><strong>SUMMARY</strong></p>
-          <p>Seats Booked :  </p>
-          <p>Date : </p>
-          <p>Amount Paid :</p>
+          <p>Seats Booked :  {formData.pos} </p>
+          <p>Date : {formData.date}</p>
+          <p>Amount Paid : { formData.amount } </p>
           <Link to="/"><button style={{ position:'relative',left:'82px'}}>OK</button></Link>
         </div>,
         {

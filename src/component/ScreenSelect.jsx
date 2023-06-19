@@ -29,8 +29,7 @@ const ScreenSelect = () => {
   }, []);
 
   const screenSelect = (show) => {
-    console.log(formData);
-    navigate("/ticket-selection", { state: { formData: { ...formData, show: show } } });
+    navigate("/ticket-selection", { state: { formData: { ...formData, show: show, date: show.date } } });
   };
   
   
