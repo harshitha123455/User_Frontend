@@ -252,9 +252,9 @@ const TicketSelect = () => {
               .....................................................................................
             </h2>
             <div style={{ position: "relative", left: "60px",top:'85px' }}>
-            <h4 >Classic - [A-F] - </h4> <p style={{position:'relative',left:'120px',bottom:'41px'}}>₹ 100</p>
-            <h4 >Executive - [G-H] - </h4> <p style={{position:'relative',left:'145px',bottom:'40px'}}>₹ 200</p>
-            <h4 >Premium - [I-J] - </h4> <p style={{position:'relative',left:'130px',bottom:'40px'}}>₹ 300</p>
+            <h4 >Classic - [A-F] - </h4> <p style={{position:'relative',left:'120px',bottom:'41px'}}>₹ {normalRate}</p>
+            <h4 >Executive - [G-H] - </h4> <p style={{position:'relative',left:'145px',bottom:'40px'}}>₹ {executiveRate}</p>
+            <h4 >Premium - [I-J] - </h4> <p style={{position:'relative',left:'130px',bottom:'40px'}}>₹ {premiumRate}</p>
             </div>
             <div style={{ position: "relative", bottom: "273px" }} className="seat-container">{renderSeats()}</div>
               <div style={{position:'relative',bottom:'245px',left:'58px',backgroundColor:'',width:'700px'}}>
