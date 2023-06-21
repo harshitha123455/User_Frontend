@@ -105,7 +105,7 @@ const HomePage = () => {
         </li>
       </ul></div>
           
-      <img
+      {/* <img
         src={arrow}
         style={{
           position: "absolute",
@@ -116,7 +116,7 @@ const HomePage = () => {
           filter: "invert(100%)",
         }}
         alt="Arrow"
-      />
+      /> */}
       <div style={{ display: "flex", flexWrap: "wrap",position: "absolute",top:"-228px" }}>
         <Carousel
           autoPlay
@@ -161,7 +161,7 @@ const HomePage = () => {
                     width: "500px",
                     position: "absolute",
                     top: "300px",
-                    right: "1000px",
+                    right: "1080px",
                     // transform: "translate(-50%, -50%)",
                   }}
                 ><Slide top cascade duration={2000}> 
@@ -211,6 +211,7 @@ const HomePage = () => {
                   borderStyle: "solid",
                   borderColor: "white",
                   borderRadius: "10px",
+                  width:'270px',
                 }}
               />
               <h3
