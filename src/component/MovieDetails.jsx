@@ -1,4 +1,5 @@
 import React from "react";
+import Fade from 'react-reveal/Fade';
 import {
   BrowserRouter as Router,
   Route,
@@ -13,9 +14,11 @@ import Modal from "@mui/joy/Modal";
 import ModalClose from "@mui/joy/ModalClose";
 import Typography from "@mui/joy/Typography";
 import Sheet from "@mui/joy/Sheet";
+import Flash from 'react-reveal/Flash';
 import { useState, useEffect } from "react";
 import UserService from "../service/user-service";
 import { useNavigate } from "react-router-dom";
+
 import "../App.css";
 
 const MovieDetails = () => {
@@ -143,32 +146,37 @@ const MovieDetails = () => {
               <div className="movie-poster">
                 {/* <img src="movie-poster.jpg" alt="Movie Poster" /> */}
               </div>
-
+              
               <div
                 className="movie-info"
                 style={{ position: "relative", bottom: "70px" }}
               >
+                {/* <Flash duration={1500}> */}
                 <h1 className="movie-title">
                   {moviedetail ? moviedetail.name : ""}
                 </h1>
+                {/* </Flash> */}
+                
+                <Fade duration={1500}>
                 <p className="movie-genre">
-                  Genre: {moviedetail ? moviedetail.genre.join(", ") : ""}{" "}
+                  <strong>Genre:</strong> {moviedetail ? moviedetail.genre.join(", ") : ""}{" "}
                 </p>
                 <p className="movie-duration">
-                  Duration: {moviedetail ? moviedetail.duration : ""}{" "}
+                <strong>Duration:</strong> {moviedetail ? moviedetail.duration : ""}{" "}
                 </p>
                 <p className="movie-director">
-                  Movie Director: {moviedetail ? moviedetail.director : ""}
+                <strong>Movie Director:</strong> {moviedetail ? moviedetail.director : ""}
                 </p>
                 <p className="movie-releasedate">
-                  Release Date: {moviedetail ? moviedetail.releaseDate : ""}{" "}
+                <strong>Release Date:</strong> {moviedetail ? moviedetail.releaseDate : ""}{" "}
                 </p>
                 <p className="movie-cast">
-                  Cast: {moviedetail ? moviedetail.cast.join(", ") : ""}
+                <strong>Cast:</strong> {moviedetail ? moviedetail.cast.join(", ") : ""}
                 </p>
                 <p className="movie-description">
-                  {moviedetail ? moviedetail.description : ""}
+                <strong>Description:</strong> {moviedetail ? moviedetail.description : ""}
                 </p>
+                </Fade>
               </div>
             </div>
 

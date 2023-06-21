@@ -3,8 +3,19 @@ import logo from "../asset/LOGO.png";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import UserService from "../service/user-service";
+import Zoom from 'react-reveal/Zoom';
+import Fade from 'react-reveal/Fade';
+
 
 const ScreenSelect = () => {
+  const hoverUpStyles = {
+    transition: 'transform 0.3s ease',
+  };
+
+  const hoverUpHoverStyles = {
+    transform: 'translateY(-10px)', // Adjust the value to control the amount of upward movement
+  };
+
   const userService = new UserService();
   const location = useLocation();
   const navigate = useNavigate();
@@ -96,6 +107,7 @@ const ScreenSelect = () => {
       </div>
 
       <u>
+      <Zoom right>
         <h1
           style={{
             position: "relative",
@@ -106,10 +118,15 @@ const ScreenSelect = () => {
         >
           Select Screen
         </h1>
+        </Zoom>
       </u>
 
-      <div style={{ position: "relative", bottom: "280px" }}>
-        <div style={{ display: "flex", flexWrap: "wrap", marginLeft: "40px" }}>
+       
+        <div           style={hoverUpStyles}
+      onMouseEnter={(e) => e.target.style.transform = 'translateY(-10px)'}
+      onMouseLeave={(e) => e.target.style.transform = ''}> <Fade duration={1900}>
+      <div style={{ position: "relative", bottom: "280px" ,width:'700px'}}>
+        <div style={{ display: "flex", flexWrap: "wrap", marginLeft: "70px" }}>
           {shows.map((show, index) => (
             <button
             key={index}
@@ -134,7 +151,9 @@ const ScreenSelect = () => {
           </button>
           ))}
         </div>
+      </div></Fade>
       </div>
+      
     </div>
   );
 };

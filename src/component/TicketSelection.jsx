@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import "../TicketSelect.css";
+import Fade from 'react-reveal/Fade';
 import curve from '../asset/curve.png'
+import Flash from 'react-reveal/Flash';
 import {
   BrowserRouter as Router,
   Route,
@@ -232,7 +234,7 @@ const TicketSelect = () => {
           </a>
         </li>
       </ul>
-        
+       <Fade duration={3000}>
       <div
         style={{
           margin: "130px",
@@ -245,7 +247,9 @@ const TicketSelect = () => {
         }}
       >
         <div style={{ position: "relative", left: "50px" }}>
+          <Fade>
           <h1 style={{ position: "relative", left: "30px" }}>Select Your Seats</h1>
+          </Fade>
           <div>
             <h3 style={{ position: "relative", left: "560px",top:'10px' }}>Screen</h3>
             <h2 style={{ position: "relative", left: "320px",bottom:'10px' }}>
@@ -257,13 +261,14 @@ const TicketSelect = () => {
             <h4 >Premium - [I-J] - </h4> <p style={{position:'relative',left:'130px',bottom:'40px'}}>₹ {premiumRate}</p>
             </div>
             <div style={{ position: "relative", bottom: "273px" }} className="seat-container">{renderSeats()}</div>
-              <div style={{position:'relative',bottom:'245px',left:'58px',backgroundColor:'',width:'700px'}}>
+              <div style={{position:'relative',bottom:'245px',left:'58px',backgroundColor:'',width:'700px'}}> <Flash>
                 <p>
-                  <h4 style={{fontSize:'16.38px'}}>Selected Seats : {selectedSeats.join(", ")}</h4>
+                  <h4  style={{fontSize:'16.38px'}}>Selected Seats :</h4> <h4 style={{color:'#ac6a00',position:'relative',left:'128px',bottom:'42px'}}> {selectedSeats.join(", ")}</h4>
                 </p>
                 <p>
-                  <h4>Total Amount : {`₹ ${totalAmount}`}</h4>
+                  <h4>Total Amount : </h4> <h4 style={{color:'#ac6a00',position:'relative',left:'125px',bottom:'40px'}}> {`₹ ${totalAmount}`}</h4>
                 </p>
+                </Flash>
               </div>
               
               <div
@@ -300,6 +305,7 @@ const TicketSelect = () => {
           </div>
         </div>
       </div>
+      </Fade> 
     </div>
   );
 };

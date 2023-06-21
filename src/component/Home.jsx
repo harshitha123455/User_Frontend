@@ -1,6 +1,8 @@
 import React from "react";
 import logo from "../asset/LOGO.png";
 import arrow from "../asset/scroll.png";
+import Fade from 'react-reveal/Fade';
+
 import Image1 from "../asset/b.jpg";
 import {
   BrowserRouter as Router,
@@ -20,6 +22,14 @@ import UserService from "../service/user-service";
 // ];
 
 const HomePage = () => {
+  const zoomOutStyles = {
+    transition: 'transform 0.5s ease',
+  };
+
+  const zoomOutHoverStyles = {
+    transform: 'scale(0.9)', // Adjust the value to control the zoom level
+  };
+
   const userService = new UserService();
   const [moviedetails, setMovieDetails] = useState([]);
   const [highlight, setHighlight] = useState([]);
@@ -69,7 +79,7 @@ const HomePage = () => {
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <li>
           <a
-            href="/movies"
+            href="/about"
             style={{
               position: "relative",
               left: "1040px",
@@ -77,7 +87,7 @@ const HomePage = () => {
               zIndex: 1,
             }}
           >
-            Movies
+            About
           </a>
         </li>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -117,7 +127,7 @@ const HomePage = () => {
 
               to={`/movie-details/${highlight.id}`}
               style={{ textDecoration: "none" }}
-            >
+            > 
               <button
                 style={{
                   position: "relative",
@@ -131,6 +141,7 @@ const HomePage = () => {
             </Link>
 
             <div style={{ textAlign: "center" }}>
+            <Fade duration={1500}>
               <img
                 className="bg"
                 src={highlight.mainMovImage}
@@ -143,7 +154,12 @@ const HomePage = () => {
                   objectFit: "cover",
                 }}
               />
+              </Fade>
+              <div>
+             
+
               <h1
+              
                 style={{
                   color: "white",
                   position: "relative",
@@ -151,9 +167,14 @@ const HomePage = () => {
 
                   width: "500px",
                 }}
-              >
+              > <Fade top cascade duration={1500}>
+
                 {highlight.mainName}
+                </Fade>
               </h1>
+              
+              </div>
+              
             </div>
           </div>
         ))}
@@ -174,13 +195,19 @@ const HomePage = () => {
             to={`/movie-details/${moviedetail.id}`} // Update the to prop with a unique identifier
             style={{ textDecoration: "none" }}
           >
-            <div
+            <div>
+            
+            <div         style={zoomOutStyles}
+      onMouseEnter={(e) => e.target.style.transform = 'scale(0.9)'}
+      onMouseLeave={(e) => e.target.style.transform = ''}> 
+            <div   
               style={{
                 margin: "10px",
                 marginLeft: "40px",
                 marginRight: "40px",
               }}
             >
+              <Fade delay={400} >
               <img
                 className="bg"
                 src={moviedetail.imageUrl}
@@ -200,6 +227,9 @@ const HomePage = () => {
               >
                 {moviedetail.name}
               </h3>
+              </Fade>
+            </div></div>
+            
             </div>
           </Link>
         ))}
