@@ -23,6 +23,11 @@ import CircularProgress from "@mui/material/CircularProgress";
 
 const Payment = () => {
   const [isLoading, setIsLoading] = useState(false);
+  const [cardNumber, setCardNumber] = useState("");
+  const [cardName, setCardName] = useState("");
+  const [expiryMonth, setExpiryMonth] = useState("");
+  const [expiryYear, setExpiryYear] = useState("");
+  const [cvv, setCVV] = useState("");
 
   const handleClick = () => {
     setIsLoading(true);
@@ -42,17 +47,66 @@ const Payment = () => {
 
   const handlePayment = async (e) => {
     e.preventDefault();
-    // view that loading page
+
+    // Validation
+    if (!validateCardNumber(cardNumber)) {
+      console.log("Invalid card number");
+      return;
+    }
+
+    if (!validateExpiryMonth(expiryMonth)) {
+      console.log("Invalid expiry month");
+      return;
+    }
+
+    if (!validateExpiryYear(expiryYear)) {
+      console.log("Invalid expiry year");
+      return;
+    }
+
+    if (!validateCVV(cvv)) {
+      console.log("Invalid CVV");
+      return;
+    }
+
+    // View the loading page
     const response = await userService.bookTickets(formData);
     if (response[0]) {
       console.log("Tickets Booked Successfully with id: ", response[1]);
     } else {
       console.log("Error in booking tickets");
     }
-    // close that loading page and navigate to receipt
+    // Close the loading page and navigate to receipt
     navigate("/receipt", {
       state: { formData: { ...response[1], date: formData.date } },
     });
+  };
+
+  const validateCardNumber = (number) => {
+    // Perform card number validation logic here
+    // Example: Ensure the card number meets a certain pattern or length
+    return number.length === 16;
+  };
+
+  const validateExpiryMonth = (month) => {
+    // Perform expiry month validation logic here
+    // Example: Ensure the month is a valid value (1-12)
+    const monthNumber = parseInt(month);
+    return monthNumber >= 1 && monthNumber <= 12;
+  };
+
+  const validateExpiryYear = (year) => {
+    // Perform expiry year validation logic here
+    // Example: Ensure the year is a valid value (e.g., not in the past)
+    const currentYear = new Date().getFullYear();
+    const yearNumber = parseInt(year);
+    return yearNumber >= currentYear;
+  };
+
+  const validateCVV = (cvv) => {
+    // Perform CVV validation logic here
+    // Example: Ensure the CVV is a valid length (e.g., 3 or 4)
+    return cvv.length === 3 || cvv.length === 4;
   };
 
   return (
@@ -155,6 +209,8 @@ const Payment = () => {
                       <input
                         type="text"
                         placeholder="Card Number"
+                        value={cardNumber}
+                        onChange={(e) => setCardNumber(e.target.value)}
                         style={{
                           width: "382px",
                           height: "20px",
@@ -171,6 +227,8 @@ const Payment = () => {
                       <input
                         type="text"
                         placeholder="Card Name"
+                        value={cardName}
+                        onChange={(e) => setCardName(e.target.value)}
                         style={{
                           width: "382px",
                           height: "20px",
@@ -187,6 +245,8 @@ const Payment = () => {
                       <input
                         type="text"
                         placeholder="M"
+                        value={expiryMonth}
+                        onChange={(e) => setExpiryMonth(e.target.value)}
                         style={{
                           width: "17px",
                           height: "12px",
@@ -203,6 +263,8 @@ const Payment = () => {
                       <input
                         type="text"
                         placeholder="YY"
+                        value={expiryYear}
+                        onChange={(e) => setExpiryYear(e.target.value)}
                         style={{
                           width: "17px",
                           height: "12px",
@@ -217,8 +279,10 @@ const Payment = () => {
                     <label>
                       {/* CVV*/}
                       <input
-                        type="text"
+                        type="password"
                         placeholder="CVV"
+                        value={cvv}
+                        onChange={(e) => setCVV(e.target.value)}
                         style={{
                           width: "46px",
                           height: "12px",
@@ -245,7 +309,11 @@ const Payment = () => {
                         disabled={isLoading}
                         onClick={handleClick}
                       >
-                        {isLoading ? <CircularProgress size={24} /> : "PAY"}
+                        {isLoading ? (
+                          <CircularProgress size={24} />
+                        ) : (
+                          "PAY"
+                        )}
                       </Button1>
                     </button>
                   </form>
