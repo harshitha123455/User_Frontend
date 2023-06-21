@@ -45,9 +45,9 @@ const NotificationComponent = () => {
 
   return (
     <div>
-        <img src={tick} alt="no tick" style={{width:'100px',position:'relative',left:'720px',top:'150px'}}/> <Fade>
-        <h3 style={{color:'white',position:'relative',left:'670px',top:'150px'}}>Payment Is Succesfull !!</h3></Fade>
-        <button style={{position:'relative',left:'700px',top:'150px'}} onClick={handleButtonClick}>Show Summary</button>
+        <img src={tick} alt="no tick" style={{width:'100px',position:'relative',left:'720px',top:'280px'}}/> <Fade>
+        <h3 style={{color:'white',position:'relative',left:'670px',top:'280px'}}>Payment Is Succesfull !!</h3></Fade>
+        <button style={{position:'relative',left:'700px',top:'280px'}} onClick={handleButtonClick}>Show Summary</button>
         <ToastContainer />
     </div>
   );

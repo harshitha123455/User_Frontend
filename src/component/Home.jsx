@@ -2,7 +2,7 @@ import React from "react";
 import logo from "../asset/LOGO.png";
 import arrow from "../asset/scroll.png";
 import Fade from 'react-reveal/Fade';
-
+import Slide from 'react-reveal/Slide';
 import Image1 from "../asset/b.jpg";
 import {
   BrowserRouter as Router,
@@ -47,9 +47,10 @@ const HomePage = () => {
   
 
   return (
-    <div>
+    <div style={{position:'relative',top:'149px'}}>
       {/* Navbar */}
-      {/* <ul className="navbar-items">
+      <div>
+      <ul className="navbar-items">
         <img
           src={logo}
           alt="No Logo"
@@ -102,8 +103,8 @@ const HomePage = () => {
             Contact
           </a>
         </li>
-      </ul> */}
-
+      </ul></div>
+          
       <img
         src={arrow}
         style={{
@@ -111,12 +112,12 @@ const HomePage = () => {
           zIndex: "999",
           width: "100px",
           left: "700px",
-          top:"620px",
+          bottom:"120px",
           filter: "invert(100%)",
         }}
         alt="Arrow"
       />
-      <div style={{ display: "flex", flexWrap: "wrap" }}>
+      <div style={{ display: "flex", flexWrap: "wrap",position: "absolute",top:"-228px" }}>
         <Carousel
           autoPlay
           infiniteLoop
@@ -133,15 +134,15 @@ const HomePage = () => {
                 <button
                   style={{
                     position: "relative",
-                    top: "45px",
-                    left: "42px",
+                    top: "415px",
+                    right: "630px",
                     zIndex: 1,
                   }}
                 >
                   Book Tickets
                 </button>
               </Link>
-
+                <Fade duration={2000}>
               <div style={{ textAlign: "center", position: "relative" }}>
                 <img
                   className="bg"
@@ -159,14 +160,15 @@ const HomePage = () => {
                     color: "white",
                     width: "500px",
                     position: "absolute",
-                    top: "50%",
-                    left: "50%",
-                    transform: "translate(-50%, -50%)",
+                    top: "300px",
+                    right: "1000px",
+                    // transform: "translate(-50%, -50%)",
                   }}
-                >
-                  {highlightItem.movie.name}
+                ><Slide top cascade duration={2000}> 
+                  {highlightItem.movie.name} 
+                  </Slide>
                 </h1>
-              </div>
+              </div> </Fade>
             </div>
           ))}
         </Carousel>
@@ -178,7 +180,7 @@ const HomePage = () => {
           flexWrap: "wrap",
           marginLeft: "48px",
           position: "relative",
-          bottom: "300px",
+          top: "490px",
         }}
       >
         {moviedetails.map((moviedetail, index) => (

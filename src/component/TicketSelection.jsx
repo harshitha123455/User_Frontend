@@ -242,7 +242,7 @@ const TicketSelect = () => {
           backgroundColor: "white",
           borderRadius: "30px",
           position: "relative",
-          bottom: "390px",
+          bottom: "235px",
           height:"100vh"
         }}
       >

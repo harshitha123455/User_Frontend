@@ -13,7 +13,9 @@ import Zoom from 'react-reveal/Zoom';
 const Contact = () => {
   return (
     <div>
+     <div style={{position:'relative',top:'149px'}}>
       {/* Navbar */}
+      <div>
       <ul className="navbar-items">
         <img
           src={logo}
@@ -67,7 +69,7 @@ const Contact = () => {
             Contact
           </a>
         </li>
-      </ul>
+      </ul> </div></div>
 
       <video
         autoPlay
@@ -78,7 +80,7 @@ const Contact = () => {
           width: "1520px",
           height: "780px",
           position: "relative",
-          bottom: "376px",
+          bottom: "246px",
           objectFit: "cover",
           backgroundColor: "50px",
         }}
@@ -88,7 +90,7 @@ const Contact = () => {
         <h1
           style={{
             position: "relative",
-            bottom: "850px",
+            bottom: "750px",
             left: "100px",
             color: "white",
             zIndex: 123,
@@ -100,7 +102,7 @@ const Contact = () => {
         <p
           style={{
             position: "relative",
-            bottom: "860px",
+            bottom: "760px",
             left: "100px",
             color: "white",
             zIndex: 123,
@@ -114,7 +116,7 @@ const Contact = () => {
         <img
           src={phone}
           alt="No"
-          style={{ position: "relative", bottom: "330px", left: "850px" }}
+          style={{ position: "relative", bottom: "200px", left: "850px" }}
         /> </Fade>
         <Zoom cascasde>
         <div
@@ -123,7 +125,7 @@ const Contact = () => {
             width: "650px",
             position: "relative",
             left: "120px",
-            bottom: "900px",
+            bottom: "790px",
 
             textAlign: "center",
             fontSize: "16px",
@@ -148,7 +150,7 @@ const Contact = () => {
             height: "490px",
             position: "relative",
             left: "120px",
-            bottom: "900px",
+            bottom: "790px",
             borderRadius: "30px",
             textAlign: "center",
             fontSize: "16px",
