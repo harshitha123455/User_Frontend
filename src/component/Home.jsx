@@ -13,6 +13,8 @@ import {
 } from "react-router-dom";
 import { useState, useEffect } from "react";
 import UserService from "../service/user-service";
+import { Carousel } from "react-responsive-carousel";
+import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 
 // const highlight = [
 //   {
@@ -38,20 +40,16 @@ const HomePage = () => {
       setMovieDetails(data);
     });
     userService.getHighlight().then((data) => {
-      setHighlight([
-        {
-          mainMovImage: "http://localhost:8880/highlight/highlight.jpg",
-          mainName: data.name,
-          id: data.id,
-        }
-      ]);
+      console.log(data);
+      setHighlight(data);
     });
   }, []);
+  
 
   return (
     <div>
       {/* Navbar */}
-      <ul className="navbar-items">
+      {/* <ul className="navbar-items">
         <img
           src={logo}
           alt="No Logo"
@@ -104,7 +102,7 @@ const HomePage = () => {
             Contact
           </a>
         </li>
-      </ul>
+      </ul> */}
 
       <img
         src={arrow}
@@ -119,65 +117,59 @@ const HomePage = () => {
         alt="Arrow"
       />
       <div style={{ display: "flex", flexWrap: "wrap" }}>
-        {highlight.map((highlight, index1) => (
-          <div>
-            <Link
-              // key={index1}
-              // to={`/movie-details/${index1}`}    // Update the to prop with a unique identifier
-
-              to={`/movie-details/${highlight.id}`}
-              style={{ textDecoration: "none" }}
-            > 
-              <button
-                style={{
-                  position: "relative",
-                  top: "45px",
-                  left: "42px",
-                  zIndex: 1,
-                }}
+        <Carousel
+          autoPlay
+          infiniteLoop
+          showThumbs={true}
+          transitionTime={1000}
+          interval={3000}
+        >
+          {highlight.map((highlightItem, index1) => (
+            <div key={index1} style={{ height: "750px", backgroundColor: "rgba(0, 0, 0, 1)" }}>
+              <Link
+                to={`/movie-details/${highlightItem.movie.id}`}
+                style={{ textDecoration: "none" }}
               >
-                Book Tickets
-              </button>
-            </Link>
+                <button
+                  style={{
+                    position: "relative",
+                    top: "45px",
+                    left: "42px",
+                    zIndex: 1,
+                  }}
+                >
+                  Book Tickets
+                </button>
+              </Link>
 
-            <div style={{ textAlign: "center" }}>
-            <Fade duration={1500}>
-              <img
-                className="bg"
-                src={highlight.mainMovImage}
-                alt="Sorry"
-                style={{
-                  width: "1519px",
-                  height: "900px",
-                  position: "relative",
-                  bottom: "376px",
-                  objectFit: "cover",
-                }}
-              />
-              </Fade>
-              <div>
-             
-
-              <h1
-              
-                style={{
-                  color: "white",
-                  position: "relative",
-                  bottom: "980px",
-
-                  width: "500px",
-                }}
-              > <Fade top cascade duration={1500}>
-
-                {highlight.mainName}
-                </Fade>
-              </h1>
-              
+              <div style={{ textAlign: "center", position: "relative" }}>
+                <img
+                  className="bg"
+                  src={highlightItem.largePosterUrl}
+                  alt="Sorry"
+                  style={{
+                    width: "100%",
+                    maxHeight: "1000px",
+                    objectFit: "cover",
+                    marginBottom: "-20px",
+                  }}
+                />
+                <h1
+                  style={{
+                    color: "white",
+                    width: "500px",
+                    position: "absolute",
+                    top: "50%",
+                    left: "50%",
+                    transform: "translate(-50%, -50%)",
+                  }}
+                >
+                  {highlightItem.movie.name}
+                </h1>
               </div>
-              
             </div>
-          </div>
-        ))}
+          ))}
+        </Carousel>
       </div>
 
       <div

@@ -123,7 +123,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className={`navbar ${isNavOpen ? "open" : ""}`}>
+    <nav className={`navbar ${isNavOpen ? "open" : ""}`} style={{ height: "0px" }}>
       <div className="navbar-toggle" onClick={toggleNav}>
         <span></span>
         <span></span>
