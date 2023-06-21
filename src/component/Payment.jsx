@@ -118,7 +118,7 @@ const Payment = () => {
             <Button
               style={{
                 position: "relative",
-                top: "130px",
+                top: "300px",
                 left: "630px",
                 color: "white",
                 borderColor: "white",

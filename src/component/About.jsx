@@ -11,7 +11,9 @@ import Zoom from 'react-reveal/Zoom';
 const About = () => {
   return (
     <div>
+            <div style={{position:'relative',top:'149px'}}>
       {/* Navbar */}
+      <div>
       <ul className="navbar-items">
         <img
           src={logo}
@@ -65,7 +67,7 @@ const About = () => {
             Contact
           </a>
         </li>
-      </ul>
+      </ul> </div></div>
 
       <video
         autoPlay
@@ -76,7 +78,7 @@ const About = () => {
           width: "1519px",
           height: "780px",
           position: "relative",
-          bottom: "376px",
+          bottom: "246px",
           objectFit: "cover",
         }}
       ></video>
@@ -86,7 +88,7 @@ const About = () => {
         <h1
           style={{
             position: "relative",
-            bottom: "850px",
+            bottom: "750px",
             left: "100px",
             color: "white",
             zIndex: 123,
@@ -98,7 +100,7 @@ const About = () => {
         <p
           style={{
             position: "relative",
-            bottom: "860px",
+            bottom: "760px",
             left: "100px",
             color: "white",
             zIndex: 123,
@@ -111,7 +113,7 @@ const About = () => {
         <img
           src={movie1}
           alt="No"
-          style={{ position: "relative", bottom: "420px", left: "100px" }}
+          style={{ position: "relative", bottom: "260px", left: "100px" }}
         />
         <Fade>
         <div
@@ -120,7 +122,7 @@ const About = () => {
             width: "650px",
             position: "relative",
             left: "700px",
-            bottom: "850px",
+            bottom: "700px",
             justifyContent: "center",
             alignItems:'center',
             fontSize: "16px",
@@ -153,7 +155,7 @@ const About = () => {
         <img
           src={movie2}
           alt="No"
-          style={{ position: "relative", bottom: "620px", left: "830px" }}
+          style={{ position: "relative", bottom: "480px", left: "830px" }}
         />
         <Zoom cascade>
         <div
@@ -162,7 +164,7 @@ const About = () => {
             width: "650px",
             position: "relative",
             left: "100px",
-            bottom: "1080px",
+            bottom: "980px",
             textAlign: "center",
             fontSize: "16px",
           }}

@@ -86,7 +86,7 @@ const ScreenSelect = () => {
                 zIndex: 1,
               }}
             >
-              Movies
+              About
             </a>
           </li>
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -112,7 +112,7 @@ const ScreenSelect = () => {
           style={{
             position: "relative",
             left: "650px",
-            bottom: "260px",
+            bottom: "80px",
             color: "white",
           }}
         >
@@ -125,7 +125,7 @@ const ScreenSelect = () => {
         <div           style={hoverUpStyles}
       onMouseEnter={(e) => e.target.style.transform = 'translateY(-10px)'}
       onMouseLeave={(e) => e.target.style.transform = ''}> <Fade duration={1900}>
-      <div style={{ position: "relative", bottom: "280px" ,width:'700px'}}>
+      <div style={{ position: "relative", bottom: "80px" ,width:'700px'}}>
         <div style={{ display: "flex", flexWrap: "wrap", marginLeft: "70px" }}>
           {shows.map((show, index) => (
             <button

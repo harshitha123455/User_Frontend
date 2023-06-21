@@ -58,64 +58,63 @@ const MovieDetails = () => {
   };
   return (
     <div>
+      <div style={{position:'relative',top:'149px'}}>
+      {/* Navbar */}
       <div>
-        {" "}
-        {/* Navbar */}
-        <ul className="navbar-items">
-          <img
-            src={logo}
-            alt="No Logo"
+      <ul className="navbar-items">
+        <img
+          src={logo}
+          alt="No Logo"
+          style={{
+            position: "relative",
+            left: "80px",
+            bottom: "220px",
+            width: "150px",
+            zIndex: 1,
+          }}
+        />
+        <li>
+          <a
+            href="/"
             style={{
               position: "relative",
-              left: "80px",
-              bottom: "220px",
-              width: "150px",
+              left: "1040px",
+              bottom: "170px",
               zIndex: 1,
             }}
-          />
-          <li>
-            <a
-              href="/"
-              style={{
-                position: "relative",
-                left: "1040px",
-                bottom: "170px",
-                zIndex: 1,
-              }}
-            >
-              Home
-            </a>
-          </li>
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          <li>
-            <a
-              href="/movies"
-              style={{
-                position: "relative",
-                left: "1040px",
-                bottom: "170px",
-                zIndex: 1,
-              }}
-            >
-              Movies
-            </a>
-          </li>
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          <li>
-            <a
-              href="/contact"
-              style={{
-                position: "relative",
-                left: "1040px",
-                bottom: "170px",
-                zIndex: 1,
-              }}
-            >
-              Contact
-            </a>
-          </li>
-        </ul>
-      </div>
+          >
+            Home
+          </a>
+        </li>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <li>
+          <a
+            href="/about"
+            style={{
+              position: "relative",
+              left: "1040px",
+              bottom: "170px",
+              zIndex: 1,
+            }}
+          >
+            About
+          </a>
+        </li>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <li>
+          <a
+            href="/contact"
+            style={{
+              position: "relative",
+              left: "1040px",
+              bottom: "170px",
+              zIndex: 1,
+            }}
+          >
+            Contact
+          </a>
+        </li>
+      </ul> </div></div>
 
       <div style={{ position: "relative", bottom: "350px" }}>
         <u>
@@ -131,14 +130,14 @@ const MovieDetails = () => {
           </h1>
         </u>
 
-        <div style={{ padding: "70px" }}>
+        <div style={{ padding: "75px" }}>
           <div
             style={{
               padding: "110px",
               backgroundColor: "white",
               borderRadius: "50px",
               position: "relative",
-              bottom: "25px",
+              top: "105px",
               paddingBottom: "8px",
             }}
           >

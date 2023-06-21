@@ -138,7 +138,7 @@ const Navbar = () => {
         </li>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <li>
-          <a href="/movies" style={{position: "relative",left:'1020px'}}>Movies</a>
+          <a href="/about" style={{position: "relative",left:'1020px'}}>About</a>
         </li>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <li>
