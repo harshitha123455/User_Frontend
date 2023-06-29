@@ -123,7 +123,7 @@ const HomePage = () => {
           infiniteLoop
           showThumbs={true}
           transitionTime={1000}
-          interval={3000}
+          interval={4000}
         >
           {highlight.map((highlightItem, index1) => (
             <div key={index1} style={{ height: "750px", backgroundColor: "rgba(0, 0, 0, 1)" }}>
